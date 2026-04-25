@@ -24,7 +24,7 @@
 
 **Датасет:** [Mobiles & laptop Sales Data](https://www.kaggle.com/datasets/vinothkannaece/mobiles-and-laptop-sales-data)
 
-**Целевая метрика:** [Accuracy / F1 / RMSE / ...]
+**Целевая метрика:** MSE
 
 
 ## Структура репозитория
