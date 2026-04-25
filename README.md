@@ -1,9 +1,9 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/kOqwghv0)
-# ML Project — [Название проекта]
+# ML Project — Прогнозирование рыночной стоимости и спроса на мобильные устройства и ноутбуки.
 
-**Студент:** [ФИО / Student ID]
+**Студент:** Сметанин Л. В. 
 
-**Группа:** [Группа]
+**Группа:** БИВ236
 
 
 ## Оглавление
@@ -20,9 +20,9 @@
 
 <!-- Кратко опишите задачу: что предсказываем, какой датасет, метрика качества -->
 
-**Задача:** [Классификация / Регрессия / Кластеризация / ...]
+**Задача:** Регрессия
 
-**Датасет:** [Название и источник датасета]
+**Датасет:** [Mobiles & laptop Sales Data](https://www.kaggle.com/datasets/vinothkannaece/mobiles-and-laptop-sales-data)
 
 **Целевая метрика:** [Accuracy / F1 / RMSE / ...]
 
