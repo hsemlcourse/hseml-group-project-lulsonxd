@@ -1,0 +1,7 @@
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+select = ["E", "F", "I", "W"] # Проверка ошибок, импортов, форматирования
+
+[tool.ruff.mccabe]
+max-complexity = 10

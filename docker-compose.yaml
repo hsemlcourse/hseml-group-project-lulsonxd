@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  model_pipeline:
+    build: .
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
