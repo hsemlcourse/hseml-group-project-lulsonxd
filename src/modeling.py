@@ -1,17 +1,18 @@
 # src/modeling.py
 import os
-import joblib
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.linear_model import Ridge
-from sklearn.ensemble import RandomForestRegressor, ExtraTreesRegressor
-from xgboost import XGBRegressor
-from lightgbm import LGBMRegressor
-from sklearn.metrics import mean_absolute_error
-from sklearn.preprocessing import StandardScaler
 
-from src.config import PROCESSED_DATA_PATH, MODEL_DIR, MODEL_PATH
+import joblib
+import numpy as np
+import pandas as pd
+from lightgbm import LGBMRegressor
+from sklearn.ensemble import ExtraTreesRegressor, RandomForestRegressor
+from sklearn.linear_model import Ridge
+from sklearn.metrics import mean_absolute_error
+from sklearn.model_selection import GridSearchCV, train_test_split
+from sklearn.preprocessing import StandardScaler
+from xgboost import XGBRegressor
+
+from src.config import MODEL_DIR, MODEL_PATH, PROCESSED_DATA_PATH
 from src.preprocessing import run_preprocessing_pipeline
 
 SEED = 42
@@ -26,7 +27,7 @@ def train_and_evaluate():
     # 2. Разделение на X и y
     X = df.drop(columns=['Quantity Sold'])
     y = df['Quantity Sold']
-    
+
     feature_names = X.columns.tolist()
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=SEED)
@@ -53,7 +54,7 @@ def train_and_evaluate():
     for name, (model, params) in configs.items():
         # Перебор гиперпараметров
         grid = GridSearchCV(model, params, cv=2, scoring='neg_mean_absolute_error', n_jobs=-1)
-        
+
         # Ridge обучаем на масштабированных данных, древесные — на обычных
         if name == "Ridge":
             grid.fit(X_train_scaled, y_train)
@@ -94,7 +95,7 @@ def train_and_evaluate():
         joblib.dump((scaler, best_pipeline_model), MODEL_PATH)
     else:
         joblib.dump(best_pipeline_model, MODEL_PATH)
-        
+
     print(f"\n🥇 Победитель: {best_model_name} с MAE: {best_overall_mae:.4f}")
     print(f"💾 Модель успешно сохранена в: {MODEL_PATH}")
 

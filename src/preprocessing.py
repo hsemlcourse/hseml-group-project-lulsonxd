@@ -1,8 +1,17 @@
 # src/preprocessing.py
 import os
-import pandas as pd
+
 import kagglehub
-from src.config import KAGGLE_DATASET, RAW_DATA_DIR, PROCESSED_DATA_DIR, RAW_DATA_PATH, PROCESSED_DATA_PATH
+import pandas as pd
+
+from src.config import (
+    KAGGLE_DATASET,
+    PROCESSED_DATA_DIR,
+    PROCESSED_DATA_PATH,
+    RAW_DATA_DIR,
+    RAW_DATA_PATH,
+)
+
 
 def download_data():
     """Скачивает датасет с Kaggle через kagglehub и сохраняет в data/raw"""
@@ -16,7 +25,7 @@ def download_data():
         raise FileNotFoundError("CSV файл не найден в скачанном датасете.")
 
     full_cache_path = os.path.join(cache_path, files[0])
-    
+
     # Создаем локальную папку data/raw и копируем файл туда
     os.makedirs(RAW_DATA_DIR, exist_ok=True)
     df = pd.read_csv(full_cache_path)
@@ -58,7 +67,7 @@ def feature_engineering(df):
     # Удаляем неинформативные текстовые колонки для обучения
     to_drop = ['Product Code', 'Product Specification', 'Customer Name',
                'Inward Date', 'Dispatch Date', 'Customer Location']
-    
+
     # Оставляем только те колонки, которые реально есть в датасете
     existing_drops = [col for col in to_drop if col in df.columns]
     return df.drop(columns=existing_drops)
