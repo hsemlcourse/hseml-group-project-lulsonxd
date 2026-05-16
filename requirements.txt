@@ -21,3 +21,4 @@ lightgbm==4.3.0
 matplotlib==3.8.2
 seaborn==0.13.1
 ruff==0.1.14
+kagglehub>=0.2.0

@@ -2,13 +2,16 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# Системная зависимость для компиляции LightGBM
-RUN apt-get update && apt-get install -y libgomp1 && rm -rf /var/lib/apt/lists/*
-
+# 1. СНАЧАЛА копируем только файл с зависимостями
 COPY requirements.txt .
+
+# 2. Устанавливаем библиотеки. 
+# Этот шаг закэшируется и НЕ БУДЕТ перезапускаться, пока ты не изменишь сам requirements.txt!
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# 3. И ТОЛЬКО ПОТОМ копируем файлы исходного кода (src, pyproject.toml)
+COPY src/ ./src/
+COPY pyproject.toml .
 
-# Команда сначала проверяет код линтером ruff, а затем запускает долгое обучение
-CMD ["sh", "-c", "ruff check src/ && python src/train.py"]
+# 4. Запуск линтера и пайплайна
+CMD ["sh", "-c", "ruff check src/ && python -m src.modeling"]
