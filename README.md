@@ -57,8 +57,8 @@
 Этот блок замените способом запуска вашего сервиса.
 ```bash
 # 1. Клонировать репозиторий
-git clone <url>
-cd <repo-name>
+git clone https://github.com/hsemlcourse/hseml-group-project-lulsonxd.git
+cd hseml-group-project-lulsonxd
 
 # 2. Создать виртуальное окружение
 python -m venv .venv
@@ -67,6 +67,12 @@ source .venv/bin/activate   # Linux/macOS
 
 # 3. Установить зависимости
 pip install -r requirements.txt
+
+# 4. Пройтись линтером (опционально)
+ruff check src/
+
+# 5. Запуск
+python -m src.modeling
 ```
 
 ## Данные
@@ -75,11 +81,16 @@ pip install -r requirements.txt
 
 
 ## Результаты
-Здесь коротко выпишите результаты.
-| Модель | [Метрика 1] | [Метрика 2] | Примечание |
-|--------|-------------|-------------|------------|
-| Baseline | — | — | |
-| Лучшая модель | — | — | |
+
+Модель	Ошибка (MAE)	Лучшие параметры
+0	Ridge	2.4939	{'alpha': 10.0}
+1	RandomForest	2.5439	{'n_estimators': 100}
+2	ExtraTrees	2.6165	{'n_estimators': 100}
+3	XGBoost	2.4967	{'learning_rate': 0.1, 'n_estimators': 50}
+4	LightGBM	2.4961	{'n_estimators': 50}
+
+Baseline: Ridge, MAE: 2.4939
+Лучшая модель: Ridge
 
 
 ## Отчёт
